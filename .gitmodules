@@ -1,3 +1,6 @@
 [submodule "puppet/production/modules/io_portalwar"]
 	path = puppet/production/modules/io_portalwar
 	url = https://github.com/psadmin-io/psadminio-io_portalwar.git
+[submodule "puppet/production/modules/io_weblogic"]
+	path = puppet/production/modules/io_weblogic
+	url = https://github.com/psadmin-io/psadminio-io_weblogic.git
