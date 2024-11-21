@@ -7,9 +7,7 @@ Testing custom DPK in CM 18
     "environment_name": "%{::envname}"
     "io_portalwar::index_redirect":  "true"
     "io_portalwar::redirect_target": "./%{hiera('pia_site_name')}/signon.html"
-    "io_portalwar::healthcheck":     "up"
-    "io_portalwar::rename_pia_cookie": "true"
-    "io_portalwar::pia_cookie_name": "%{hiera('environment_name')}-PORTAL-PSJESSIONID"
+    "io_portalwar::healthcheck":     "up-%{::envname}-%{::envtype}"
     "io_portalwar::hostinfo": "lb"
     "io_portalwar::robots": "true"
     "io_weblogic::java_options":
