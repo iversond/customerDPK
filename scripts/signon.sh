@@ -13,20 +13,18 @@ echo " -- Downloading Image from Github"
 curl -L -o /tmp/OracleLogo_Black.svg https://raw.githubusercontent.com/iversond/customerDPK/main/scripts/images/InsertLogoHere-Header.png
 
 echo ${PSFT_PIA_DOMAINS}
-# for domain in "${PSFT_PIA_DOMAINS[@]}"; do
-#   # Remove square brackets and parentheses from the domain
-#   domain=${domain#[[]}
-#   domain=${domain%[]]}
+for domain in "${PSFT_PIA_DOMAINS[@]}"; do
+  # Remove square brackets and parentheses from the domain
+  domain=${domain#[[]}
+  domain=${domain%[]]}
   
-#   # Do something with the domain
-#   echo "Processing domain: ${domain}"
-#   echo "-- Copying to PS_CFG_HOME/werbserv/${domain} sites"
-#   sudo -u psadm2 -i sh -c "ls \${PS_CFG_HOME}/webserv/${domain}/applications/peoplesoft/PORTAL.war/"
-#   sudo -u psadm2 -i sh -c "cp /tmp/OracleLogo_Black.svg \${PS_CFG_HOME}/webserv/${domain}/applications/peoplesoft/PORTAL.war/*/images/"
+  site="PSFT_WEB_${domain}_SITE_NAMES"
+  # Do something with the domain
+  echo "Processing domain: ${domain} and site: ${!site}"
+  echo "-- Copying to PS_CFG_HOME/werbserv/${domain} sites"
+  sudo -u psadm2 -i sh -c "cp /tmp/OracleLogo_Black.svg \${PS_CFG_HOME}/webserv/${domain}/applications/peoplesoft/PORTAL.war/${!site}/images/"
 
-# done
+done
 
 echo "-- Restart web server for changes"
-echo "$(which psa)"
-echo "$(which gem)"
-# sudo -u opc -i sh -c "/home/opc/.local/share/gem/ruby/3.2.0/bin/psa restart web"
+sudo -u opc -i sh -c "psa restart web"
